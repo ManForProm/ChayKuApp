@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.chaykuapp.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:name="com.example.chaykuapp.AllTeaTabFragment"
+        android:label="all Tea Fragment"
+        tools:layout="@layout/all_tea_tab_fragment">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.example.chaykuapp.SecondFragment"
-        android:label="@string/second_fragment_label"
+        android:label="Add Tea Fragment"
         tools:layout="@layout/fragment_second">
 
         <action

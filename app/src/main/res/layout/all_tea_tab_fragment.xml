@@ -17,6 +17,7 @@
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/all_tea_list"
         android:layout_width="409dp"
         android:layout_height="653dp"
         app:layout_constraintBottom_toBottomOf="parent"

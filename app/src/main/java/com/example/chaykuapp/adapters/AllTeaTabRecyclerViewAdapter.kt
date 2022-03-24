@@ -27,16 +27,26 @@ class AllTeaTabRecyclerViewAdapter() : ListAdapter<UsersTea,
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(binding: AllTeaRecyclerItemBinding) :
+    inner class ViewHolder(private val binding: AllTeaRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(tea: UsersTea){
+            binding.apply {
+                    tea.apply {
+                        allTeaRecyclerItemBaseText.text = base
+                        allTeaRecyclerItemMainTasteText.text = mainTaste
+                        allTeaRecyclerItemNameText.text = teaName
+                        allTeaRecyclerItemTasteText.text = taste
+                        allTeaRecyclerItemDecorationText.text = decoration
+                    }
+            }
 
         }
     }
 
 }
 
+//List Adapter Callback
 private class TeaItemCallBack : DiffUtil.ItemCallback<UsersTea>(){
     override fun areItemsTheSame(oldItem: UsersTea, newItem: UsersTea): Boolean {
         return oldItem == newItem

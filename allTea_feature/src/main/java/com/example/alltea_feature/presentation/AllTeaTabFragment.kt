@@ -1,22 +1,24 @@
-package com.example.chaykuapp
+package com.example.alltea_feature.presentation
 
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.chaykuapp.adapters.AllTeaTabRecyclerViewAdapter
-import com.example.chaykuapp.data.UsersTea
-import com.example.chaykuapp.databinding.AllTeaTabFragmentBinding
+import com.example.alltea_feature.R
+import com.example.alltea_feature.databinding.AllTeaTabFragmentBinding
+import com.example.alltea_feature.presentation.adapters.AllTeaTabRecyclerViewAdapter
+import kotlinx.coroutines.flow.collect
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class AllTeaTabFragment : Fragment(R.layout.all_tea_tab_fragment) {
-    private var adapter:AllTeaTabRecyclerViewAdapter? = null
 
+    private val allTeaViewModel: AllTeaTabViewModel by viewModels()
+    private var adapter:AllTeaTabRecyclerViewAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,30 +27,23 @@ class AllTeaTabFragment : Fragment(R.layout.all_tea_tab_fragment) {
 
         this.adapter = allTeaAdapter
 
+        lifecycleScope.launchWhenStarted{
+            allTeaViewModel.teas.collect(){ teas ->
+                adapter?.submitList(teas.teas)
+            }
+        }
         val binding = AllTeaTabFragmentBinding.bind(view)
-
-        adapter?.submitList(listOf(UsersTea(
-                "Oolong",
-            "Sasha",
-            "black",
-            "rose",
-            "none",
-            "none"
-        )))
 
         with(binding.allTeaList){
             layoutManager = LinearLayoutManager(context)
-            this.adapter =allTeaAdapter
+            this.adapter = allTeaAdapter
         }
 
         binding.addAnotherTea.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
-
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
         adapter = null
     }
 }

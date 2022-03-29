@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@layout/fragment_placeholder">
 
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.chaykuapp.AllTeaTabFragment"
-        android:label="all Tea Fragment"
-        tools:layout="@layout/all_tea_tab_fragment">
+<!--    <fragment-->
+<!--        android:id="@+id/FirstFragment"-->
+<!--        android:name="com.example.chaykuapp.presentation.AllTeaTabFragment"-->
+<!--        android:label="all Tea Fragment"-->
+<!--        tools:layout="@layout/all_tea_tab_fragment">-->
 
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.chaykuapp.SecondFragment"
-        android:label="Add Tea Fragment"
-        tools:layout="@layout/fragment_second">
+<!--        <action-->
+<!--            android:id="@+id/action_FirstFragment_to_SecondFragment"-->
+<!--            app:destination="@id/SecondFragment" />-->
+<!--    </fragment>-->
+<!--    <fragment-->
+<!--        android:id="@+id/SecondFragment"-->
+<!--        android:name="com.example.chaykuapp.presentation.SecondFragment"-->
+<!--        android:label="Add Tea Fragment"-->
+<!--        tools:layout="@layout/fragment_second">-->
 
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+<!--        <action-->
+<!--            android:id="@+id/action_SecondFragment_to_FirstFragment"-->
+<!--            app:destination="@id/FirstFragment" />-->
+<!--    </fragment>-->
 </navigation>

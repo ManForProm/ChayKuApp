@@ -1,15 +1,15 @@
-package com.example.chaykuapp.adapters
+package com.example.alltea_feature.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.chaykuapp.data.UsersTea
-import com.example.chaykuapp.databinding.AllTeaRecyclerItemBinding
+import com.example.alltea_feature.databinding.AllTeaRecyclerItemBinding
+import com.example.alltea_feature.databinding.AllTeaTabFragmentBinding
+import com.example.database_module.models.UsersTea
 
-class AllTeaTabRecyclerViewAdapter() : ListAdapter<UsersTea,
-        AllTeaTabRecyclerViewAdapter.ViewHolder>(TeaItemCallBack()) {
+class AllTeaTabRecyclerViewAdapter: ListAdapter<UsersTea,AllTeaTabRecyclerViewAdapter.ViewHolder>(TeaItemCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -22,26 +22,24 @@ class AllTeaTabRecyclerViewAdapter() : ListAdapter<UsersTea,
         )
 
     }
-
-    override fun onBindViewHolder(holder: AllTeaTabRecyclerViewAdapter.ViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
-
     inner class ViewHolder(private val binding: AllTeaRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(tea: UsersTea){
             binding.apply {
-                    tea.apply {
-                        allTeaRecyclerItemBaseText.text = base
-                        allTeaRecyclerItemMainTasteText.text = mainTaste
-                        allTeaRecyclerItemNameText.text = teaName
-                        allTeaRecyclerItemTasteText.text = taste
-                        allTeaRecyclerItemDecorationText.text = decoration
-                    }
+                tea.apply {
+                    allTeaRecyclerItemBaseText.text = base
+                    allTeaRecyclerItemMainTasteText.text = mainTaste
+                    allTeaRecyclerItemNameText.text = teaName
+                    allTeaRecyclerItemTasteText.text = taste
+                    allTeaRecyclerItemDecorationText.text = decoration
+                }
             }
 
         }
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
 }
@@ -53,7 +51,7 @@ private class TeaItemCallBack : DiffUtil.ItemCallback<UsersTea>(){
     }
 
     override fun areContentsTheSame(oldItem: UsersTea, newItem: UsersTea): Boolean {
-       return oldItem.teaName == newItem.teaName
+        return oldItem.teaName == newItem.teaName
     }
 
 }

@@ -14,3 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ChayKuApp"
 include ':app'
+include ':allTea_feature'
+include ':database_module'
+include ':new_tea_feature'

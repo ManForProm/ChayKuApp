@@ -25,17 +25,18 @@ interface AppComponent:AllTeaDeps {
 
 
 @Module
-class AppModule(private val app: Application) {
+class AppModule() {
     @Provides
     @AppScope
     fun provideUsersTeaDao(db: UsersTeaDatabase) = db.usersTeaDao()
 
     @Provides
-    fun probideUsersTeaDatabase(appContext: Context) =UsersTeaDatabase.getDatabase(appContext)
-
+    fun probideUsersTeaDatabase(appContext: Context):UsersTeaDatabase {
+     return UsersTeaDatabase.getDatabase(appContext)
+    }
     @Provides
     @AppScope
-    fun appContext():Context = app
+    fun appContext(app:Application):Context = app
 }
 
 @Scope

@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alltea_feature.databinding.AllTeaRecyclerItemBinding
 import com.example.alltea_feature.databinding.AllTeaTabFragmentBinding
-import com.example.database_module.models.UsersTea
+import com.example.database_module.db.entity.UsersTeaEntity
 
-class AllTeaTabRecyclerViewAdapter: ListAdapter<UsersTea,AllTeaTabRecyclerViewAdapter.ViewHolder>(TeaItemCallBack()) {
+class AllTeaTabRecyclerViewAdapter: ListAdapter<UsersTeaEntity,AllTeaTabRecyclerViewAdapter.ViewHolder>(TeaItemCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -24,7 +24,7 @@ class AllTeaTabRecyclerViewAdapter: ListAdapter<UsersTea,AllTeaTabRecyclerViewAd
     }
     inner class ViewHolder(private val binding: AllTeaRecyclerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(tea: UsersTea){
+        fun bind(tea: UsersTeaEntity){
             binding.apply {
                 tea.apply {
                     allTeaRecyclerItemBaseText.text = base
@@ -45,12 +45,12 @@ class AllTeaTabRecyclerViewAdapter: ListAdapter<UsersTea,AllTeaTabRecyclerViewAd
 }
 
 //List Adapter Callback
-private class TeaItemCallBack : DiffUtil.ItemCallback<UsersTea>(){
-    override fun areItemsTheSame(oldItem: UsersTea, newItem: UsersTea): Boolean {
+private class TeaItemCallBack : DiffUtil.ItemCallback<UsersTeaEntity>(){
+    override fun areItemsTheSame(oldItem: UsersTeaEntity, newItem: UsersTeaEntity): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: UsersTea, newItem: UsersTea): Boolean {
+    override fun areContentsTheSame(oldItem: UsersTeaEntity, newItem: UsersTeaEntity): Boolean {
         return oldItem.teaName == newItem.teaName
     }
 

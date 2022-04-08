@@ -4,28 +4,23 @@ import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.alltea_feature.R
 import com.example.alltea_feature.databinding.AllTeaTabFragmentBinding
-import com.example.alltea_feature.di.AllTeaComponent
-import com.example.alltea_feature.di.AllTeaComponentViewModel
 import com.example.alltea_feature.presentation.adapters.AllTeaTabRecyclerViewAdapter
 import dagger.Lazy
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
-import javax.inject.Provider
 
 class AllTeaTabFragment : Fragment(R.layout.all_tea_tab_fragment) {
 
     @Inject
-    internal lateinit var allTeaTabViewModelFatory: Lazy<AllTeaTabViewModel.allTeaViewModelFactory>
+    internal lateinit var allTeaTabViewModelFatory: Lazy<AllTeaTabViewModel.AllTeaViewModelFactory>
 
     private val allTeaViewModel: AllTeaTabViewModel by viewModels{ allTeaTabViewModelFatory.get() }
 
@@ -42,16 +37,13 @@ class AllTeaTabFragment : Fragment(R.layout.all_tea_tab_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val binding = AllTeaTabFragmentBinding.bind(view)
+
         val allTeaAdapter = AllTeaTabRecyclerViewAdapter()
 
         this.adapter = allTeaAdapter
 
-        lifecycleScope.launchWhenStarted{
-            allTeaViewModel.teas.collect(){ teas ->
-                adapter?.submitList(teas.teas)
-            }
-        }
-        val binding = AllTeaTabFragmentBinding.bind(view)
+        collectAllTea(binding)
 
         with(binding.allTeaList){
             layoutManager = LinearLayoutManager(context)
@@ -59,6 +51,28 @@ class AllTeaTabFragment : Fragment(R.layout.all_tea_tab_fragment) {
         }
 
         binding.addAnotherTea.setOnClickListener {
+        }
+    }
+
+    fun collectAllTea(binding: AllTeaTabFragmentBinding){
+        lifecycleScope.launchWhenStarted{
+            allTeaViewModel.apply {
+                loadingState?.collectLatest { status ->
+                    checkStatusLoadingAllTea(status, binding )
+                }
+
+                teas.collectLatest { teas ->
+                    adapter?.submitList(teas.teas)
+                }
+            }
+        }
+    }
+    fun checkStatusLoadingAllTea(status: LoadingState,binding: AllTeaTabFragmentBinding){
+        when(status.status){
+            LoadingState.Status.RUNNING -> binding.allTeaProgressBar.visibility = View.VISIBLE
+            LoadingState.Status.SUCCESS -> binding.allTeaProgressBar.visibility = View.GONE
+            LoadingState.Status.FAILED -> binding.allTeaErrorLoadingText.visibility = View.VISIBLE
+
         }
     }
     override fun onDestroy() {

@@ -2,5 +2,6 @@
 <resources>
 
     <string name="app_name">ChayKuApp</string>
+    <string name="placeholderAllTeaRecycler" >someLargeNameForTea</string>
 
 </resources>

@@ -3,6 +3,7 @@ package com.example.chaykuapp.di
 import android.app.Application
 import android.content.Context
 import com.example.alltea_feature.di.AllTeaDeps
+import com.example.database_module.db.dao.UsersTeaDao
 import com.example.database_module.db.database.UsersTeaDatabase
 import dagger.BindsInstance
 import dagger.Component
@@ -21,6 +22,8 @@ interface AppComponent:AllTeaDeps {
 
         fun build():AppComponent
     }
+
+    override val getAllTeaDB: UsersTeaDao
 }
 
 

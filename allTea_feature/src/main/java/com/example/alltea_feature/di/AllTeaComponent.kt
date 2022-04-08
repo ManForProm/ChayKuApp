@@ -2,18 +2,25 @@ package com.example.alltea_feature.di
 
 import android.app.Application
 import android.content.Context
+import androidx.annotation.RestrictTo
+import androidx.lifecycle.ViewModelProvider
 import com.example.alltea_feature.domain.usecase.GetTeaInformationUseCase
+import com.example.alltea_feature.presentation.AllTeaTabFragment
 import com.example.alltea_feature.presentation.AllTeaTabViewModel
 import com.example.database_module.db.dao.UsersTeaDao
 import dagger.Binds
 import dagger.Component
 import dagger.Module
 import dagger.Provides
+import javax.inject.Provider
 import javax.inject.Scope
+import javax.inject.Singleton
+import kotlin.properties.Delegates.notNull
+
 
 @Component(dependencies = [AllTeaDeps::class],
             modules = [AllTeaModule::class])
-interface AllTeaComponent {
+internal interface AllTeaComponent {
 
     @Component.Builder
     interface Builder{
@@ -24,34 +31,41 @@ interface AllTeaComponent {
 
     }
 
-    val getTeaInformationUseCase: GetTeaInformationUseCase
+    fun inject(fragment: AllTeaTabFragment)
 }
 
 @Module
-interface AllTeaModule{
+class AllTeaModule{
     //provides
-    companion object {
-        @Provides
-        fun provideGetTeaInformationUseCase(): GetTeaInformationUseCase {
-            return GetTeaInformationUseCase()
-        }
+    @Provides
+    fun provideGetTeaInformationUseCase(): GetTeaInformationUseCase {
+        return GetTeaInformationUseCase()
     }
 }
-
+//dependenses
 interface AllTeaDeps{
-    //dependenses
-    fun getAllTeaDB(): UsersTeaDao
+    val getAllTeaDB: UsersTeaDao
 }
 
 interface AllTeaDepsProvider{
+
+    @get:RestrictTo(RestrictTo.Scope.LIBRARY)
     val deps: AllTeaDeps
+
+    companion object: AllTeaDepsProvider by AllTeaDepsStore
+}
+
+object AllTeaDepsStore : AllTeaDepsProvider {
+
+    override var deps: AllTeaDeps by notNull()
 }
 
 val Context.allTeaDepsProvider:AllTeaDepsProvider
     get()= when(this){
         is AllTeaDepsProvider -> this
         is Application -> error("Application must implements NewsDetailsDapsProvider")
-        else -> applicationContext.allTeaDepsProvider
+        else -> this.applicationContext.allTeaDepsProvider
     }
 @Scope
 internal annotation class AllTeaScope
+

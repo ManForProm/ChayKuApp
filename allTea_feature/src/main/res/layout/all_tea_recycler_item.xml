@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="10dp"
-    app:cardElevation="10dp"
+    app:cardElevation="2sp"
+    android:clickable="true"
+    android:layout_weight="1"
+    app:cardUseCompatPadding="true"
     app:cardCornerRadius="20dp"
     app:cardBackgroundColor="@color/green_palit_1"
     android:id="@+id/all_tea_recycler_item">
@@ -17,80 +21,147 @@
             android:id="@+id/all_tea_recycler_item_name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:width="75sp"
             android:fontFamily="sans-serif-black"
             android:gravity="left"
-            android:text="@string/app_name"
-            android:textSize="20dp"
+            android:text="@string/placeholderAllTeaRecycler"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintEnd_toStartOf="@+id/view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="1dp"
+            android:layout_height="75sp"
+            android:background="@color/green_palit_3"
+            android:padding="2sp"
+            app:layout_constraintBottom_toBottomOf="@id/all_tea_recycler_item_name_text"
+            app:layout_constraintTop_toTopOf="@id/all_tea_recycler_item_name_text"
+            app:layout_constraintLeft_toRightOf="@id/all_tea_recycler_item_name_text"
+            app:layout_constraintRight_toLeftOf="@id/componentsRecyclerTeaLayout"
+            tools:layout_editor_absoluteX="105dp"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
+            android:id="@+id/componentsRecyclerTeaLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-
+            android:padding="5sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/all_tea_recycler_item_image"
-            app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/all_tea_recycler_item_name_text"
+            app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/all_tea_recycler_item_base_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="@string/app_name"
+                android:width="50sp"
+                android:layout_margin="5sp"
+                android:text="@string/placeholderAllTeaRecycler"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_tea_recycler_item_main_taste_text"
+                app:layout_constraintEnd_toStartOf="@id/all_tea_recycler_item_taste_text"
+                tools:layout_editor_absoluteX="5dp" />
 
             <TextView
                 android:id="@+id/all_tea_recycler_item_main_taste_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:width="50sp"
+                android:layout_margin="5sp"
                 android:text="@string/app_name"
-                app:layout_constraintBottom_toTopOf="@+id/all_tea_recycler_item_base_text"
-                app:layout_constraintStart_toStartOf="@+id/all_tea_recycler_item_base_text"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintBottom_toBottomOf="@+id/all_tea_recycler_item_decoration_text"
+                app:layout_constraintEnd_toStartOf="@+id/all_tea_recycler_item_decoration_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/all_tea_recycler_item_taste_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:width="50sp"
                 android:text="@string/app_name"
+                android:layout_margin="5sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/all_tea_recycler_item_base_text"
-                app:layout_constraintTop_toBottomOf="@+id/all_tea_recycler_item_main_taste_text" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/all_tea_recycler_item_main_taste_text"
+                app:layout_constraintTop_toBottomOf="@+id/all_tea_recycler_item_decoration_text" />
 
             <TextView
                 android:id="@+id/all_tea_recycler_item_decoration_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:width="50sp"
+                android:layout_margin="5sp"
                 android:text="@string/app_name"
-                app:layout_constraintBottom_toTopOf="@+id/all_tea_recycler_item_taste_text"
-                app:layout_constraintStart_toEndOf="@+id/all_tea_recycler_item_base_text"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/all_tea_recycler_item_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foregroundGravity="right"
-            android:src="@drawable/ic_not_found_tea"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/componentsRecyclerTeaLayout">
+
+            <ImageView
+                android:id="@+id/all_tea_recycler_item_base_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="50sp"
+                android:layout_margin="5sp"
+                android:src="@drawable/ic_not_found_tea"
+                android:text="@string/placeholderAllTeaRecycler"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/all_tea_recycler_item_main_taste_image"
+                app:layout_constraintEnd_toStartOf="@id/all_tea_recycler_item_taste_image"
+                tools:layout_editor_absoluteX="5dp" />
+
+            <ImageView
+                android:id="@+id/all_tea_recycler_item_main_taste_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_not_found_tea"
+                android:width="50sp"
+                android:layout_margin="5sp"
+                android:text="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/all_tea_recycler_item_decoration_image"
+                app:layout_constraintEnd_toStartOf="@+id/all_tea_recycler_item_decoration_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/all_tea_recycler_item_taste_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:width="50sp"
+                android:text="@string/app_name"
+                android:src="@drawable/ic_not_found_tea"
+                android:layout_margin="5sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/all_tea_recycler_item_main_taste_image"
+                app:layout_constraintTop_toBottomOf="@+id/all_tea_recycler_item_decoration_image" />
+
+            <ImageView
+                android:id="@+id/all_tea_recycler_item_decoration_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_not_found_tea"
+                android:width="50sp"
+                android:layout_margin="5sp"
+                android:text="@string/app_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

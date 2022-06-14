@@ -17,9 +17,11 @@ internal class AllTeaTabViewModel(private val getTeaInformationUseCase: GetTeaIn
         flow<UsersTeas> {
             repeat(10) {
                 emit(getTeaInformationUseCase.execute(it))
-                loadingState = flow<LoadingState> { LoadingState.LOADED }
                 kotlinx.coroutines.delay(3000)
             }
+            loadingState = flow<LoadingState> {
+                LoadingState.LOADED }
+                .stateIn(started = SharingStarted.Eagerly, scope = viewModelScope, initialValue = LoadingState.LOADED)
         }.onStart {
             loadingState = flow { LoadingState.LOADING}
         }.stateIn(scope = viewModelScope,

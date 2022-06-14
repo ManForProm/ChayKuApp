@@ -28,7 +28,7 @@ interface AppComponent:AllTeaDeps {
 
 
 @Module
-class AppModule() {
+class AppModule {
     @Provides
     @AppScope
     fun provideUsersTeaDao(db: UsersTeaDatabase) = db.usersTeaDao()

@@ -3,5 +3,5 @@
 
     <string name="app_name">ChayKuApp</string>
     <string name="placeholderAllTeaRecycler" >someLargeNameForTea</string>
-
+    <string name="floating_button_discription">add tea floating button</string>
 </resources>

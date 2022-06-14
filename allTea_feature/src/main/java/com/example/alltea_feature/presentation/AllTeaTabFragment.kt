@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.ProgressBar
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.get
 import androidx.lifecycle.lifecycleScope
@@ -51,6 +50,7 @@ class AllTeaTabFragment : Fragment(R.layout.all_tea_tab_fragment) {
         }
 
         binding.addAnotherTea.setOnClickListener {
+//            activity.supportFragmentManager.beginTransaction().replace(R.id.all_tea_main_layout, )
         }
     }
 
@@ -67,6 +67,7 @@ class AllTeaTabFragment : Fragment(R.layout.all_tea_tab_fragment) {
             }
         }
     }
+
     fun checkStatusLoadingAllTea(status: LoadingState,binding: AllTeaTabFragmentBinding){
         when(status.status){
             LoadingState.Status.RUNNING -> binding.allTeaProgressBar.visibility = View.VISIBLE

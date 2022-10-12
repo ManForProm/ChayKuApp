@@ -4,13 +4,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.alltea_feature.domain.usecase.GetTeaInformationUseCase
+import com.example.alltea_feature.navigation.FloatingActionButtonClick
 import com.example.database_module.models.UsersTeas
 import kotlinx.coroutines.flow.*
 import java.lang.Exception
 import javax.inject.Inject
 import javax.inject.Provider
 
-internal class AllTeaTabViewModel(private val getTeaInformationUseCase: GetTeaInformationUseCase) : ViewModel() {
+internal class AllTeaTabViewModel @Inject constructor(private val getTeaInformationUseCase: GetTeaInformationUseCase,
+                                                      private val floatingActionButtonClick: FloatingActionButtonClick
+                                                      ) : ViewModel() {
+
+    fun isFloatingButtonClicked(){
+        floatingActionButtonClick.goToNext()
+    }
 
     var loadingState: Flow<LoadingState>? = null
     val teas: Flow<UsersTeas> = try {
@@ -35,15 +42,19 @@ internal class AllTeaTabViewModel(private val getTeaInformationUseCase: GetTeaIn
 
 
     class AllTeaViewModelFactory @Inject constructor(
-        private val getTeaInformationUseCase: Provider<GetTeaInformationUseCase>
-    ) : ViewModelProvider.Factory {
+
+        private val getTeaInformationUseCase: Provider<GetTeaInformationUseCase>,
+        private val floatingActionButtonClick: Provider<FloatingActionButtonClick>
+             ) : ViewModelProvider.Factory {
 
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == AllTeaTabViewModel::class.java)
-            return AllTeaTabViewModel(getTeaInformationUseCase.get()) as T
+            return AllTeaTabViewModel(getTeaInformationUseCase.get(), floatingActionButtonClick.get()) as T
         }
     }
+
+
 
     override fun onCleared() {
         super.onCleared()

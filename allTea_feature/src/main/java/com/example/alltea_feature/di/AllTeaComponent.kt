@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.annotation.RestrictTo
 import androidx.lifecycle.ViewModelProvider
 import com.example.alltea_feature.domain.usecase.GetTeaInformationUseCase
+import com.example.alltea_feature.navigation.FloatingActionButtonClick
 import com.example.alltea_feature.presentation.AllTeaTabFragment
 import com.example.alltea_feature.presentation.AllTeaTabViewModel
 import com.example.database_module.db.dao.UsersTeaDao
@@ -34,17 +35,10 @@ internal interface AllTeaComponent {
     fun inject(fragment: AllTeaTabFragment)
 }
 
-@Module
-class AllTeaModule{
-    //provides
-    @Provides
-    fun provideGetTeaInformationUseCase(): GetTeaInformationUseCase {
-        return GetTeaInformationUseCase()
-    }
-}
 //dependenses
 interface AllTeaDeps{
     val getAllTeaDB: UsersTeaDao
+    val floatingActionButtonClick: FloatingActionButtonClick
 }
 
 interface AllTeaDepsProvider{

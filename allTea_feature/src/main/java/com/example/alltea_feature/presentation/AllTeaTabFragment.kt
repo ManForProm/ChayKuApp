@@ -48,12 +48,11 @@ class AllTeaTabFragment : Fragment(R.layout.all_tea_tab_fragment) {
             layoutManager = LinearLayoutManager(context)
             this.adapter = allTeaAdapter
         }
-
         binding.addAnotherTea.setOnClickListener {
+            allTeaViewModel.isFloatingButtonClicked()
 //            activity.supportFragmentManager.beginTransaction().replace(R.id.all_tea_main_layout, )
         }
     }
-
     fun collectAllTea(binding: AllTeaTabFragmentBinding){
         lifecycleScope.launchWhenStarted{
             allTeaViewModel.apply {
@@ -64,6 +63,7 @@ class AllTeaTabFragment : Fragment(R.layout.all_tea_tab_fragment) {
                 teas.collectLatest { teas ->
                     adapter?.submitList(teas.teas)
                 }
+
             }
         }
     }

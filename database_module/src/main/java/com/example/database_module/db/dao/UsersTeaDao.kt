@@ -13,6 +13,6 @@ interface UsersTeaDao {
     suspend fun insertUsersTea(userTea:UsersTeaEntity)
 
     @Delete
-    suspend fun deletUsersTea(userTea: UsersTeaEntity)
+    suspend fun deleteUsersTea(userTea: UsersTeaEntity)
 
 }

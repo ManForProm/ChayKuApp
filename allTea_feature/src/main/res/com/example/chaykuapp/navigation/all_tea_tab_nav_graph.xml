@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.chaykuapp.navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@layout/all_tea_tab_fragment">
+    <fragment
+        android:id="@+id/allTeaTabFragment"
+        android:name="com.example.alltea_feature.presentation.AllTeaTabFragment"
+        android:label="AllTeaTabFragment" />
+        <action
+            android:id="@+id/action_allTraTabFragmentToAddNewTeaFragment" />
+</com.example.chaykuapp.navigation>

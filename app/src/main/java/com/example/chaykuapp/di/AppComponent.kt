@@ -3,12 +3,10 @@ package com.example.chaykuapp.di
 import android.app.Application
 import android.content.Context
 import com.example.alltea_feature.di.AllTeaDeps
+import com.example.alltea_feature.navigation.FloatingActionButtonClick
 import com.example.database_module.db.dao.UsersTeaDao
 import com.example.database_module.db.database.UsersTeaDatabase
-import dagger.BindsInstance
-import dagger.Component
-import dagger.Module
-import dagger.Provides
+import dagger.*
 import javax.inject.Scope
 
 @AppScope
@@ -24,22 +22,8 @@ interface AppComponent:AllTeaDeps {
     }
 
     override val getAllTeaDB: UsersTeaDao
-}
+    override val floatingActionButtonClick: FloatingActionButtonClick
 
-
-@Module
-class AppModule {
-    @Provides
-    @AppScope
-    fun provideUsersTeaDao(db: UsersTeaDatabase) = db.usersTeaDao()
-
-    @Provides
-    fun probideUsersTeaDatabase(appContext: Context):UsersTeaDatabase {
-     return UsersTeaDatabase.getDatabase(appContext)
-    }
-    @Provides
-    @AppScope
-    fun appContext(app:Application):Context = app
 }
 
 @Scope
